@@ -78,7 +78,17 @@ A robust backend system for video upload, processing (HLS/DASH), and controlled 
 
 ## Key API Endpoints
 
+### Authentication
 -   `POST /auth/register` - Create a new user account.
+-   `POST /auth/login` - Authenticate and get an access token.
+
+### Videos
 -   `POST /videos/upload` - Upload a video file (starts background encoding).
 -   `GET /videos/{video_id}/play` - Get a secure HLS stream URL.
 -   `GET /videos/{video_id}/analytics` - View performance metrics (Owner only).
+-   `POST /videos/{video_id}/view/start` - Start tracking a video view session.
+-   `POST /videos/{video_id}/view/progress` - Update watch progress for resume functionality.
+
+### Secure Streaming (Internal/Tokenized)
+-   `GET /secure-stream/{video_id}/index.m3u8` - Serve HLS playlists with token verification.
+-   `GET /secure-stream/{video_id}/{filename}` - Serve video segments with token verification.
