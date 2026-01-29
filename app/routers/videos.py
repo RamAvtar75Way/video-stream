@@ -27,10 +27,7 @@ HLS_DIR = "media/hls"
 
 router = APIRouter(prefix="/videos", tags=["Videos"])
 
-
-# --------------------------------------------------
 # Upload video
-# --------------------------------------------------
 @router.post("/upload", response_model=UploadResponse)
 async def upload_video(
     title: str,
@@ -77,9 +74,7 @@ async def upload_video(
     )
 
 
-# --------------------------------------------------
 # Start video view
-# --------------------------------------------------
 @router.post("/{video_id}/view/start")
 def start_view(
     video_id: str,
@@ -108,9 +103,7 @@ def start_view(
     return {"message": "View started"}
 
 
-# --------------------------------------------------
 # Update view progress
-# --------------------------------------------------
 @router.post("/{video_id}/view/progress")
 def update_progress(
     video_id: str,
@@ -135,9 +128,7 @@ def update_progress(
     return {"message": "Progress updated"}
 
 
-# --------------------------------------------------
 # Video analytics (owner only)
-# --------------------------------------------------
 @router.get("/{video_id}/analytics", response_model=VideoAnalyticsResponse)
 def video_analytics(
     video_id: str,
@@ -162,9 +153,7 @@ def video_analytics(
     )
 
 
-# --------------------------------------------------
 # Play video (secure + resume)
-# --------------------------------------------------
 @router.get("/{video_id}/play", response_model=StreamResponse)
 def play_video(
     video_id: str,

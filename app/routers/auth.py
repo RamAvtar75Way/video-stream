@@ -10,9 +10,8 @@ from app.schemas.user import UserCreate
 router = APIRouter(prefix="/auth", tags=["Auth"])
 
 
-# -------------------------
+
 # REGISTER
-# -------------------------
 @router.post("/register")
 def register(user: UserCreate, db: Session = Depends(get_db)):
     existing_user = db.query(User).filter(User.email == user.email).first()
@@ -34,9 +33,8 @@ def register(user: UserCreate, db: Session = Depends(get_db)):
     return {"message": "User registered successfully"}
 
 
-# -------------------------
+
 # LOGIN (OAuth2-compatible)
-# -------------------------
 @router.post("/login")
 def login(
     form_data: OAuth2PasswordRequestForm = Depends(),

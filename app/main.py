@@ -15,9 +15,7 @@ import logging
 
 app = FastAPI(title="Video Streaming Backend")
 
-# --------------------------------------------------
 # Global Exception Handling
-# --------------------------------------------------
 logger = logging.getLogger(__name__)
 
 @app.exception_handler(Exception)
@@ -52,4 +50,4 @@ app.mount(
 # ROOT ENDPOINT
 @app.get("/")
 def root():
-    return {"message": "Backend running 🚀"}
+    return {"message": "Backend running"}

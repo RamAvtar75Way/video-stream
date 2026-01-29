@@ -13,7 +13,7 @@ HLS_DIR = BASE_DIR / "media" / "hls"
 
 @router.get("/{video_id}/index.m3u8")
 def serve_secure_playlist(video_id: str, token: str):
-    # 1️⃣ Verify token
+    # Verify token
     verify_stream_token(token, video_id)
 
     playlist_path = HLS_DIR / video_id / "index.m3u8"
@@ -21,10 +21,10 @@ def serve_secure_playlist(video_id: str, token: str):
     if not playlist_path.exists():
         raise HTTPException(status_code=404, detail="Playlist not found")
 
-    # 2️⃣ Read playlist
+    # Read playlist
     content = playlist_path.read_text()
 
-    # 3️⃣ Inject token into every segment URL
+    # Inject token into every segment URL
     secured_lines = []
     for line in content.splitlines():
         if line.endswith(".ts"):
@@ -36,7 +36,7 @@ def serve_secure_playlist(video_id: str, token: str):
 
     secured_playlist = "\n".join(secured_lines)
 
-    # 4️⃣ Return rewritten playlist
+    # Return rewritten playlist
     return Response(
         content=secured_playlist,
         media_type="application/vnd.apple.mpegurl",

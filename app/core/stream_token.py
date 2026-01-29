@@ -9,7 +9,7 @@ def create_stream_token(video_id: str, user_id: str | None):
     payload = {
         "video_id": video_id,
         "user_id": user_id,
-        "exp": datetime.utcnow() + timedelta(minutes=5)  # ⏱ short-lived
+        "exp": datetime.utcnow() + timedelta(minutes=1) #token will expire in 1 minute just for checking but it should be 10 minutes
     }
 
     return jwt.encode(payload, settings.SECRET_KEY, algorithm=settings.ALGORITHM)
